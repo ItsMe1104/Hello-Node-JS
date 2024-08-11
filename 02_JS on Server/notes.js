@@ -35,7 +35,9 @@
 
 // 2) Node JS and V8 Engine
 
-// --> Node JS is C++ code and very little JS
+// --> Node JS is C++ code / application
+// --> It is a C++ program but it is not majorly written in C++ (21% C++ and 62% JS)
+// --> It has a core C++ program but it also has alot of Javascript APIs
 // --> JS engine (V8) is also written mostly in C++ (72%) (Search for V8 Github)
 // --> Hence, a JS engine is also a C++ program
 // --> JS engine is simply a C++ program and not a physical machine
@@ -50,24 +52,29 @@
 
 
 
+
+
 // Job of V8 engine :-
 // --> To execute JS code
-// --> V8 is a C++ program that takes JS code as input, reads and converts it into Machine Code (0,1)
+// --> V8 is a C++ program that takes JS code as input, reads and converts it into Machine Code.
 // --> Then Machine executes that code.
 
 // JS code --> V8 (C++) --> Machine Code
 
 
 
+
+
 // Node JS application :-
 // --> Since, V8 can be embedded / attached into any C++ application
-// --> Hence, Node Js was developed as a C++ application and V8 was attached to it.
+// --> Hence, Node Js was developed as a C++ application and V8 was attached to it. Therefore, V8 became just one of the dependencies for NodeJS
+
 
 
 
 
 // V.V.I
-// Question) If V8 can execute a JS cde, why we needed to put it inside Node JS
+// Question) If V8 can execute a JS code, why we needed to put it inside Node JS
 // Question) What was the need of Node JS, we could have simply put V8 engine on the server?
 
 // Solution :-
@@ -76,7 +83,11 @@
 // --> For e.g :- In "var a = 12" , writing var before variable name, then single equal to after variable name to assign and then the value after equal to. These are all standards set by Ecmascirpt
 // --> The way we write JS that are maintained by a standard known as EcmaSript
 
-// --> Ecmascript :- standard or rules decided by a central commitee. Currently we are using ES6 (meaning the 6th version of JS)
+
+
+
+
+// --> Ecmascript :- standard or rules decided by a central commitee called TC39. Currently we are using ES6 (meaning the 6th version of JS)
 // --> JS Engines have to follow these standards
 // V8 (Chrome)
 // Spider Monkey (Firefox)
@@ -95,3 +106,42 @@
 // --> For e.g :- V8 cannot access modules
 // --> Hence these APIs are added by NodeJS along with V8 to do different tasks on the server
 // --> Hence, Node JS is also called Javascript Runtime environment
+
+
+
+
+
+
+// NOTE :-
+// --> NodeJS is a C++ program but it is not majorly written in C++ (21% C++ and 62% JS)
+// --> It has a core C++ program but it also has alot of Javascript APIs which user can call (e.g :- code to connect to database)
+
+
+
+
+
+// SUMMARY :-
+
+// Internal Architecture :-
+// Server --> NodeJS --> V8 Engine + JS APIs
+
+
+
+
+
+//****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+
+
+
+// 3) Why V8 is a C++ code ?
+
+// Computer Understands --> Binary Code (0/1) --> Assembly Code (used for register programming) --> Machine Code --> High Level Language (C++ / Javascript)
+
+// --> We are capable of writing high level languages
+// --> We write JS because of its functionalities
+// --> The JS engine takes the JS code and converts it into Machine level code ( Machine code is then converted to Assembly Code)
+// --> Machine Code and Assembly code are called low level codes
+// --> Machine code is the kernel level code
+// --> Assembly code is mainly understood by our microprocessors (x86, ARM processors)
