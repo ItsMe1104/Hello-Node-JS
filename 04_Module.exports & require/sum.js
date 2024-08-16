@@ -4,9 +4,15 @@ console.log("Sum Module Executed");
 
 var x = "Hello World";
 
-function name(a, b) {
+function calculateSum(a, b) {
   const sum = a + b;
 
-  console.log(sum);
+  return sum;
 
+}
+
+
+module.exports = {
+  x: x,
+  calculateSum: calculateSum
 }

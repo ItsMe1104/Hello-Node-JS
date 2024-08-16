@@ -1,12 +1,21 @@
 var name = "Hrithik"
 
 var a = 10;
-
 var b = 20;
 
 
-console.log(name);
-console.log(a + b);
+// One way of importing
+const obj = require("./sum.js");
+
+const sum = obj.calculateSum(a, b);
+console.log(obj.x, sum);
+
+
+
+
+
+// console.log(name);
+// console.log(a + b);
 
 
 console.log(global);

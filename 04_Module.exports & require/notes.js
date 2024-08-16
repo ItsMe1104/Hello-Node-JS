@@ -151,3 +151,27 @@ module.exports = {
 
 
 
+
+
+// b) To import :-
+
+// --> Way 1 :-
+// Try to store the exported object in a variable using require()
+// Use dot operator to access the required methods and variables from the object 
+
+const obj = require("./sum.js");
+
+const sum = obj.calculateSum(a, b);
+console.log(obj.x, sum);
+
+
+
+// --> Way 2 :-
+// Destructure the exported object on the fly
+// Then use the exported variables and methods directly
+
+const { x, calculateSum } = require("./sum.js");
+
+const sum2 = calculateSum(a, b);
+console.log(x, sum2);
+
