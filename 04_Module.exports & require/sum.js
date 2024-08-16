@@ -11,8 +11,15 @@ function calculateSum(a, b) {
 
 }
 
+// Way 1 (Old Way) :-
+// module.exports = {
+//   x: x,
+//   calculateSum: calculateSum
+// }
 
+
+// Way 2 (New Way) :-
 module.exports = {
-  x: x,
-  calculateSum: calculateSum
+  x,
+  calculateSum
 }

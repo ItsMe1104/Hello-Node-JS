@@ -8,10 +8,15 @@ var b = 20;
 const obj = require("./sum.js");
 
 const sum = obj.calculateSum(a, b);
-console.log(obj.x, sum);
+console.log("Old Way :-", obj.x, sum);
 
 
 
+// Second way of importing (Destructure on the fly)
+const { x, calculateSum } = require("./sum.js");
+
+const sum2 = calculateSum(a, b);
+console.log("New Way :-", x, sum2);
 
 
 // console.log(name);

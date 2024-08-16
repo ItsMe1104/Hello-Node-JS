@@ -51,10 +51,11 @@
 
 // Syntax :-
 // require("x");
-// --> x = relative/absolute path of that file
+// --> x = relative/absolute path of that file  (with or without the extension name)
 
 // e.g :-
 require("./xyz.js")
+require("./xyz")     // will also work as the extension is assumed to be ".js" only
 
 
 
@@ -138,16 +139,35 @@ calculateSum(a, b);
 
 
 // a) To export :-
-// --> We use an object called "mdoule.exports"     (Remember the "s" after export)
-// --> Since we will export multiple variables or methods, we will export it as an object
-// --> the keys will have same names as the variable and method's names
-// --> The values will be the actual variables, methods we want to export
+
+// --> Way 1 (Old way)
+// We use an object called "mdoule.exports"     (Remember the "s" after export)
+// Since we will export multiple variables or methods, we will export it as an object
+// the keys will have same names as the variable and method's names
+// The values will be the actual variables, methods we want to export
 
 
 module.exports = {
   x: x,                                     //variable
   calculateSum: calculateSum                //method
 }
+
+
+
+// --> Way 2 (New way)
+// We use an object called "mdoule.exports"   
+// Since we will export multiple variables or methods, we will export it as an object
+// We can omit giving the key and colon, and directly write the values
+// The values will be the actual variables, methods we want to export
+// JS itself will assume the key to be same as value (Shorthand)
+
+
+module.exports = {
+  x,                                       //variable
+  calculateSum                             //method
+}
+
+
 
 
 
@@ -169,9 +189,25 @@ console.log(obj.x, sum);
 // --> Way 2 :-
 // Destructure the exported object on the fly
 // Then use the exported variables and methods directly
+// We can even destructure only the variables / methods we want to import out of all the variables/methods that have been exported
 
-const { x, calculateSum } = require("./sum.js");
+const { calculateSum } = require("./sum.js");    // ommiting "x"
 
 const sum2 = calculateSum(a, b);
-console.log(x, sum2);
+console.log(sum2);
 
+
+
+
+
+
+// ******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+
+// 6) Why so much fuss on exports and imports?
+// --> It would have been easier if we would have ommited the export
+
+// Solution :-
+// --> The names of variables in one module can conflict with the names variables of other modules. Hence, modules tend to protect their private variables and functions
+// --> Hence, a module can use its own variable without conflicting with the same name variable from some other module (Unless we import the same name variable from the other module also)
