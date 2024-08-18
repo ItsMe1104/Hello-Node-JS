@@ -21,6 +21,9 @@
 
 // 2) Modules :-
 
+// --> Formal Definition :-
+// It is a collection of code which is separate private to itself and it exist independently of any other program.
+
 // --> If there are codes in some other files also, how will they be executed along with the entry point file?
 // --> These codes in these two files are not related somehow, these two codes are very separate in separate files.
 // --> Hence these two files can be called as a separate "module"
@@ -211,3 +214,14 @@ console.log(sum2);
 // Solution :-
 // --> The names of variables in one module can conflict with the names variables of other modules. Hence, modules tend to protect their private variables and functions
 // --> Hence, a module can use its own variable without conflicting with the same name variable from some other module (Unless we import the same name variable from the other module also)
+
+
+
+
+
+// ******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+
+
+// 7) The above type of pattern for imporing and exorting are known as "Common JS Modules (cjs) ".
