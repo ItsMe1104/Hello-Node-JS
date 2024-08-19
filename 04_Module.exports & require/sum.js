@@ -2,24 +2,28 @@
 
 console.log("Sum Module Executed");
 
-var x = "Hello World";
+export var x = "Hello World";
 
-function calculateSum(a, b) {
+export function calculateSum(a, b) {
   const sum = a + b;
 
   return sum;
 
 }
 
-// Way 1 (Old Way) :-
-// module.exports = {
-//   x: x,
-//   calculateSum: calculateSum
-// }
+
+/*
+--> Way 1 (Old Way) :-
+ module.exports = {
+   x: x,
+   calculateSum: calculateSum
+ }
 
 
-// Way 2 (New Way) :-
+--> Way 2 (New Way) :-
 module.exports = {
   x,
   calculateSum
 }
+
+*/
