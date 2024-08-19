@@ -111,8 +111,14 @@ import b_variable from "./sum.js"
 
 
 
-// ii) cjs --> Older way (Till now all the nodeJS repositories use this pattern and also in the industry)
+// iii) cjs --> Older way (Till now all the nodeJS repositories use this pattern and also in the industry)
 //     mjs --> Newer way (Open JS foundation is now saying that ES modules will be the standard way of importing and exporting modules in future)
 
 
 // NOTE :- In our course we will totally follow commonJS module only, as it is highly used in the current industry
+
+
+
+
+// iv) cjs --> "this" points to empty object {}
+//     ejs --> "this" points to undefined (try console logging it)
