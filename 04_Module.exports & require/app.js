@@ -26,6 +26,13 @@ console.log("New Way :-", x, sum2);
 
 
 
+// --> Importing json file
+const data_json = require("./data.json");
+
+console.log(JSON.stringify(data_json));
+
+
+
 
 /*
 --> ES Module
@@ -44,5 +51,4 @@ console.log(this);
 
 // globalThis :- try console logging it in all JS runtime environments
 console.log("\n\nUsing globalThis :-\n\n", globalThis);
-
 console.log(globalThis === global);    // true

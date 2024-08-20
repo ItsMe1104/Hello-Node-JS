@@ -105,8 +105,13 @@ require("./xyz")     // will also work as the extension is assumed to be ".js" o
 
 // a) To export :-
 // --> We use an object called "mdoule.exports"     (Remember the "s" after export)
+// "module.exports" is an empty object {}
+
+console.log(module.exports);
+
 // --> Since we will export a single variable or method, we dont need to use an object 
 // --> We can export it directly as a variable
+
 
 function calculateSum(a, b) {
   return a + b;
@@ -145,6 +150,7 @@ calculateSum(a, b);
 
 // --> Way 1 (Old way)
 // We use an object called "mdoule.exports"     (Remember the "s" after export)
+// "module.exports" is an empty object {}
 // Since we will export multiple variables or methods, we will export it as an object
 // the keys will have same names as the variable and method's names
 // The values will be the actual variables, methods we want to export
@@ -171,6 +177,15 @@ module.exports = {
 }
 
 
+
+// --> Way 3 
+// Since module.exports is an empty object, hence we try to overwrite it.
+// just use the dot operator "." to overwrite inside like we overwrite in a normal object
+// the keys will have same names as the variable and method's names
+// The values will be the actual variables, methods we want to export
+
+module.exports.x = x;
+module.exports.calculateSum = calculateSum;
 
 
 

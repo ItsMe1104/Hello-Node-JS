@@ -106,19 +106,170 @@ import b_variable from "./sum.js"
 
 
 
+
 // ii) cjs --> By Default used in Node, unless we specify ejs in package.json
 //     mjs --> By Default used in ReactJS, Angular
+
 
 
 
 // iii) cjs --> Older way (Till now all the nodeJS repositories use this pattern and also in the industry)
 //     mjs --> Newer way (Open JS foundation is now saying that ES modules will be the standard way of importing and exporting modules in future)
 
-
 // NOTE :- In our course we will totally follow commonJS module only, as it is highly used in the current industry
+
 
 
 
 
 // iv) cjs --> "this" points to empty object {}
 //     ejs --> "this" points to undefined (try console logging it)
+
+
+
+
+
+// v) cjs --> when it is requiring the modules using require(), it does it in a synchronous way, the next line of code will only be executed once the current line completes execution, hence once the other module is completely loaded using require(), the code of current module will not move ahead.
+//     ejs --> Async option is there for asynchronously importing the other modules
+
+
+
+
+
+// vi) cjs --> The code is run in non-strict mode
+//     ejs --> The code is run in strict mode in default
+
+// non-strict mode e.g :-
+// --> we can directly define variables without var, let or const.
+// --> The code will still be executed
+z = 15;
+
+// non-strict mode e.g :-
+// --> we cannot define variables without var, let or const.
+// --> The code will give error
+z = 15;    // error --> z is not defined
+
+
+
+
+
+//************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+
+// 4) Nested Modules :-
+
+
+
+
+
+//************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+
+// 5) Making a directory as a module :-
+
+
+// Let's say our calculate folder contains three separate modules namely divide.js, subtract.js, multiply.js
+
+// calculate (directory)
+//   --> divide.js
+//   --> multiply.js
+//   --> subtract.js
+
+
+
+
+
+// Turning calculate (directory) ==> module
+
+// STEP 1
+// --> Create an "index.js" file inside the calculate directory
+// --> Inside this index.js file, we have to import the required methods / variables from other modules and export them also
+// --> import their methods / variables using require() one by one
+
+const { calculateMultiplication } = require("./multiply.js")
+const { calculateSubtraction } = require("./subtract.js")
+
+
+module.exports = { calculateMultiplication, calculateSubtraction }
+
+
+
+// STEP 2
+// --> In the module "app.js" (or any other module) where we want to import the directory module, just import the methods/variables using require() and object destructuring.
+// --> The path should now be of the directory, insted of index.js inside the directory
+// --> Although the path to index.js would also work but the upper one is a shorthand.
+
+const { calculateMultiplication, calculateSubtraction } = require("./calculate");
+
+
+
+
+// ADVANTAGE :-
+// --> Instead of making our main module messy by requiring 100s of modules for their methods / variables, we can group together all the other modules in a folder structure and then require it in our main module
+// --> Our main module (here app.js) doesn't need to know how the directory structures its files.
+//--> Behind the scenes the methods can come from same module or different modules.
+
+
+
+
+
+
+//************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+
+// 6) Importing JSON files.
+
+// --> We dont need to export the JSON file, we just need to import it in our required module using require()
+
+const data_json = require("./data.json");
+
+
+// --> Then use JSON.stringify(variable_name) to use it (it will work even if we dont do it).
+console.log(JSON.stringify(data_json));
+
+
+
+
+//************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+
+// 7) Importing modules from inside the core of Node JS :-
+
+// for e.g :- there is a module called util
+// --> No need of exporting it
+// --> Just import it using require() in our required module
+// --> The path name is "node:module_name"
+
+const util_importing = require("node:util")
+
+// --> The util module gives access to an util object which contain lots of important functions and properties like .debug, .format, etc
+
+
+
+
+//************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+
+// 8) Converting JSON to Object / Array :-
+
+
+// a) JSON --> Object
+// --> When receiving data from a web server, the data is always a string. Parse the data with JSON.parse(), and the data becomes a JavaScript object.
+// --> JSON.parse() will only work if the data received is in form of a string or we have to first make it a string using JSON.stringify(data)
+
+const data = '{"name":"John", "age":30, "city":"New York"}'
+console.log(JSON.parse(data));
+
+
+
+
+// b) JSON --> Array
+// --> When using the JSON.parse() on a JSON derived from an array, the method will return a JavaScript array, instead of a JavaScript object.
+
+const text = '["Ford", "BMW", "Audi", "Fiat"]';
+console.log(JSON.parse(text));
