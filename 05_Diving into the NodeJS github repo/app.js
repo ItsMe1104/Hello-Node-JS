@@ -3,6 +3,11 @@ var name = "Hrithik"
 var a = 10;
 var b = 20;
 
+
+console.log(__filename);     // to get the file name
+console.log(__dirname);      // to get the directory name
+
+
 console.log(name);
 console.log(a + b);
 
