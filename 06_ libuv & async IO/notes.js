@@ -168,8 +168,8 @@ var c = multiplyFn(a, b);
 // --> All the code is wrapped and executed inside the execution context
 // --> It runs in a synchronous single threaded way
 
-// --> a will be stored in memory
-// --> b will be stored in memory
+// --> a will be stored in memory heap
+// --> b will be stored in memory heap
 // --> multiplyFn() will be stored in the memory
 // --> The code of multiplyFn() will also be stored inside the memory
 // --> For variable 'c' there function call, hence a function execution context (FEC) is created and pushed at the top of the stack
@@ -178,7 +178,10 @@ var c = multiplyFn(a, b);
 
 // --> The result of a*b will be stored in the memory heap in a variable result
 // --> The result value in the memory heap is returned to the Global Execution Context from the function execution context
-// --> Since the excution of the function is completed, the function execution context will pop out of Call Stack
+// --> Since the excution of the function is completed, the function execution context (FEC) will pop out of Call Stack
+
+// --> Once the FEC moves out of the call stack, all the memory that was allocated to the variables (here result) inside the multiplyFn() are cleared by the Garbage Collector
+
 // --> The Global Execution Context again starts execution
 // --> The value returned by the multiplyFn is stored in variable 'c'
 // --> 'c' will be stored in the memory Heap
@@ -192,31 +195,3 @@ var c = multiplyFn(a, b);
 //**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
 
 
-
-
-// 4) Execution of Asynchronous Code in JS Engine:-
-
-// Asynchronous taks :-
-// a) File operations
-// b) Database operations
-// c) API call
-// d) Timer functions (setTimeout, etc)
-// e) etc
-
-
-
-// JS engine cannot do this alone
-// Node JS gives superpower to JS Engine to interact with the OS and do these tasks.
-// Accessing a file needs OS as it knows the location of the file
-// JS engine needs superpowers to connect with databases
-// OS can make anetwork call
-// JS Engine does not have a concept of time to execute the Timer functions
-// It needs to connect with the time function inside OS because OS manages time
-
-
-
-// Node JS gets these superpowers through a library called "libuv"
-// libuv is the superhero to provide the superpowers to Node
-// If JS engine needs to do a file access, it offloads it to libuv, libuv talks to the file system, gets the response and gives it back to the V8 engine
-// JS engine offloads all the asynchronous tasks to libuv
-// Same case for other asynchronous tasks as well
