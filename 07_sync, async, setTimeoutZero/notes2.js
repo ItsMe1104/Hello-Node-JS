@@ -162,8 +162,8 @@ fs.appendFileSync("./test.txt", `${Date.now()} Hey There\n`);
 
 // b) fs.appendFile("x","y","z")
 // --> x = file path along with extension
-// --> y = type of encoding of that file (utf-8 for text files)
-// --> z = callback with two arguments. 1st argument as error, incase of any error while reading the file (corrupted file / file not found).
+// --> y =  text we want to enter in it (string)
+// --> z = callback with the 1st argument as error, incase of any error while appending in the file (corrupted file / file not found).
 
 
 fs.appendFile("./test.txt", `${Date.now()} Hey There\n`, (err) => {
@@ -194,11 +194,11 @@ fs.appendFile("./test.txt", `${Date.now()} Hey There\n`, (err) => {
 // 4) Copying a file into another (copying its content)
 
 
-// a) fs.cpSync("x","y")
-// --> x = file path along with extension which is to be copied
-// --> y = file path along with extension which will get the copied content
+// a) fs.copyFileSync("x","y")
+// --> x = file path along with extension of source file which is to be copied
+// --> y = file path along with extension of destination file which will get the copied content
 
-fs.cpSync("./test.txt", "./copied_file.txt");
+fs.copyFileSync("./test.txt", "./copied_file.txt");
 
 
 
@@ -209,4 +209,83 @@ fs.cpSync("./test.txt", "./copied_file.txt");
 // --> It does not return anything
 // --> If the file in which the content is to be copied is not present, it will create the file and then copy the content.
 // --> The copied file's content will be totally overwritten
+// --> In case of error we have to handle using try-catch block
 
+
+
+
+
+
+
+
+// b) fs.copyFile("x","y","z")
+
+
+// --> x = file path along with extension of source file which is to be copied
+// --> y = file path along with extension of destination file which will get the copied content
+// --> z = callback with the 1st argument as error, incase of any error while copying in the file (corrupted file / file not found).
+
+fs.copyFile("example_file.txt", "copied_file.txt", (err) => {
+  if (err) {
+    console.log("Error Found:", err);
+  }
+  else {
+    console.log("\nFile Content copied");
+  }
+});
+
+
+
+// Features :-
+// --> It is an asynchronous method, hence it will not block the main thread and offload it to libuv. After the operation is completed, its callback will be returned to the callStack once its empty.
+// --> It is a non-blocking request
+
+// --> It does not return anything, in case of error, its callback handles it.
+// --> If the file in which the content is to be copied is not present, it will create the file and then copy the content.
+// --> The copied file's content will be totally overwritten
+
+
+
+//****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+// 5) Deleting a file
+
+
+// a) fs.unlinkSync("x")
+// --> x = file path along with extension
+
+fs.unlinkSync("./test.txt");
+
+
+
+// Features :-
+// --> It is a synchronous method, hence it will block the main thread until its operation is finished and then let the JS Engine execute the next line.
+// --> It is a blocking request
+// --> It returns undefined
+// --> If the file to be deleted is not present, it will give error and then copy the content hence, we have to handle using try-catch block
+
+
+
+
+
+
+// b) fs.unlink("x","y")
+// --> x = file path along with extension
+// --> y = callback with the 1st argument as error, incase of any error while deleting the file (corrupted file / file not found).
+
+fs.unlink("./test.txt", (err) => {
+  if (err) {
+    console.log("Error:", err);
+  }
+  else {
+    console.log("File Deleted");
+  }
+})
+
+
+// Features :-
+// --> It is an asynchronous method, hence it will block the main thread until its operation is finished and then let the JS Engine execute the next line.
+// --> It is a non-blocking request
+// --> It does not return anything
+// --> If the file to be deleted is not present, it will give error which will be handled by the callback method
