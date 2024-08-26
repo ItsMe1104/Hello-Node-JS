@@ -289,3 +289,41 @@ fs.unlink("./test.txt", (err) => {
 // --> It is a non-blocking request
 // --> It does not return anything
 // --> If the file to be deleted is not present, it will give error which will be handled by the callback method
+
+
+
+//****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+// 6) Getting the Status of a file :-
+
+//  a) fs.statSync("x")
+// --> x = file path along with extension
+
+
+const result2 = fs.statSync("./test.txt");
+console.log(result2);           //returns object containing details about the file
+
+console.log(result2.isFile());  //returns boolean whether it is a file or not
+
+
+// Features :-
+// --> It is a synchronous method, hence it will block the main thread until its operation is finished and then let the JS Engine execute the next line.
+// --> It is a non-blocking request
+// --> It returns an object containing details about your file like size (bytes), created time, last modified time, uid, isFile() etc
+// --> Errors regarding corrupted file or file not found has to be catched using try-catch block
+
+
+
+
+
+
+//****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+// 7) Making a directory
+
+// a) making single directory
+// --> fs.mkdirSync("x")
+
+fs.mkdirSync("my-docs");
