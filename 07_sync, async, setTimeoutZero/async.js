@@ -12,6 +12,10 @@ https.get('https://dummyjson.com/products', (res) => {
   console.log("Fetched Data Successfully");
 })
 
+// Sync blocking task
+fs.readFileSync("./file.txt", "utf8");
+console.log("This will execute only after file Read");
+
 // Timer Function
 setTimeout(() => {
   console.log("setTimeout called after 5 seconds");
