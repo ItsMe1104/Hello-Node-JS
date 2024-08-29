@@ -147,8 +147,9 @@
 
 
 
-// 4) Interpreter Stage (refer the pic IntrpreterStage.png):-
+// 4) Interpreter Stage (refer the pic IntrpreterStage.jpg):-
 
+// --> The whole process is called Just In Time Compilation
 // --> When the AST is passed into the Interpretr
 // --> The name of the interpreter in Google's V8 Engine is Ignition Interpreter
 // --> Its job is to convert the AST to Byte Code line by line
@@ -168,19 +169,45 @@
 
 
 
+
 //****************************************************
+
 
 
 // Deoptimization of Optimized Machine Code :-
 
-// --> In some scenarios, we have to deoptimize the machine code
+
+// --> In some scenarios, we have to deoptimize the machine code (refer the pic IntrpreterStage.jpg)
 
 // --> For e.g :-
 // ==> There is a function sum(a,b) to calculate sum of two numbers
 // ==> If this function is called again and again, Ignition Interpreter will provide this Hot code to turbofan compiler for optimization
 // ==> While optimizing the code, TurboFan Compiler makes assumptions
+// ==> Let's say we passed sum(10,5)
+// ==> Not turboFan Compiler will assume that the parameters will only be numbers, hence it will compile the function
+// ==> Hence, from next time, the sum() with parameters as numbers will run very fast.
+// ==> If we pass two strings instead of numbers as parameters, hoping that JS would concatenate the two strings.
+// ==> Here the Optimization fails, as TurboFan compiled the code such that the function could accept two numbers
+// ==> But instead it got two strings which it did not expect, hence the optimized code was not correct
+// ==> Hence, it will deoptimize the Optimized machin code containing the sum function and pass it on to the Ignition Interpreter
+// ==> Now the Ignition Interpreter will again call the sum() with two strings
+// ==> Convert it to Byte Code and then execute it.
+
+
+
+// Conclusion :-
+// --> Hence make separate functions for different data types
+// --> Else it leads to deoptimization and more time to get that function executed
+
+
+
+
+
+// Alot of behind the scenes also happens like inline caching, Copy elision (Read about it)
+
 
 
 
 // ********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
 
