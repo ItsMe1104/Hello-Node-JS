@@ -197,9 +197,15 @@
 
 // Conclusion :-
 // --> Hence make separate functions for different data types
+// --> Always pass expected things in functions
 // --> Else it leads to deoptimization and more time to get that function executed
+// --> Just In-Time Compilation = The use of compiler + interpreter to convert the code to Byte Code and Machine Code and then finally Executing it. The whole process is known as Just In-Time Compilation.
 
 
+
+
+// Summary :-
+// --> Refer the Image "Stages_of_Code_Execution_In_V8.jpg"
 
 
 
@@ -210,4 +216,62 @@
 
 // ********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
 
+
+// 5) Garbage Collection In V8 (Read About It to get more Knowledge):-
+
+// --> It happens in parallel while code execution through various stages in V8
+// --> There are different types of Garbage Collector in V8.
+// a) Orinoco
+// b) Oil Pan
+// c) Scavenger (Minor Garbage Collector)
+// d) Mark-Compact (Major Garbage Collector)
+
+// The algorithm it uses is Mark & Sweep Algorithm , etc
+
+
+
+
+// ********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+
+// 6) Some resources about V8 :-
+
+
+// a) Go to the v8 repository in Github and go to src --> comipler (Turbo Fan Compiler)
+
+// b) Earlier V8 use to have a compiler called "Crankshaft" but now it is removed in latest versions of v8
+
+// c) 10 years ago, JS use to have really slow speed but due to new techniques in JS engines as well as the processing powers of modern day computers, JS has gained alot of speed
+// --> The first JS engine built was spider monkey and now the JS engines have evolved hence JS can be used in servers
+// --> Earlier JS was an interpreted language now it is Just In Time Compiled Language
+
+
+// d) All the above explanation were regarding v8 Engine but these things happen differently in other JS Engines.
+// --> There will be one Compiler and Interpreter but the written algorithms will be different
+// --> The Garbage collection mechanisms can be different
+
+
+// e) JS has survived because it has evolved as well every other factors like Browsers, JS engines, Node JS, libUV which have consistently evolved.
+
+
+// f) To see how BYTE code looks like :-
+
+// Go to Github repository of v8
+// --> test --> cctest--> interpreter --> bytecode_expectations -->  lots of files
+
+// --> These are test case written for Interpreter
+// --> For seeing how the BYTE CODE of "if-else statements looks like"
+// --> Go to "IfConditions.golden"
+
+
+// g) In 2017, Turbo Fan Compiler was totally adopted in V8 and crankshaft got removed
+
+
+// h) To read more about the processes in V8 :-
+// --> Go to v8.dev/blog
+// --> Go to the article of "Launching Ignition and TurboFan"
+
+
+// i) Ignition is a fast low-level register based interpreter written using the backend of TurboFan.
 
