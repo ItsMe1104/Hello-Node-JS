@@ -39,3 +39,30 @@
 
 
 //*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+
+
+// 2) Event Loop :-
+
+// --> It is like a loop that keeps running, and its job is to keep checking at the call Stack and the callback queues.
+// --> Suppose some tasks are waiting in the callback queue and finds the callStack as empty, hence it will take one of the task from the callback queue, and give it to callStack for exeution
+
+
+
+// Race condition of all async tasks
+// --> If there arises a situation of race condition between one or more tasks in the callback queue waiting to be executed
+// --> Now, the Event Loop has to prioritize
+// --> This situation is mainly faced by a server
+// --> Hence, it is the job of Event loop, to push all these tasks in the callStack in correct time and correct order.
+// --> The priority of these tasks is also managed inside Event Loop (It works like an orchestrator).
+// Event loop has to wait for JS Engine to be idle / call Stack to be empty / the main thread to be unblocked so that it can push one task from callback queue to the call Stack
+
+
+
+
+
+//********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+
+
+// 3) Phases of Event Loop :-
