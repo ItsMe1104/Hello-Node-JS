@@ -53,3 +53,156 @@ console.log("Last line of the file.");
 // --> In the next cycle in the poll phase the callback of fille handling will be sent to the call Stack
 
 // END
+
+
+
+//***************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+// 2) Idle state of Event Loop :-
+
+// --> When both the Call Stack and the callback queues are empty, hence the Event Loop becomes idle
+// --> The Event Loop completes the current cycle till it reaches the poll phase and waits
+// --> If something comes (User request) in the poll phase, it will first execute the innerloop and then from poll phase
+// --> In this cycle, the Event loop doesnt start from the beginning that is timer phase but starts from the poll phase itself
+// --> Hence in this cycle, the check phase will be executed after the poll phase and the cycle continues
+
+
+
+
+//***************************************** */
+
+// Event Loop in Browsers vs Event Loop in Libuv :-
+
+// --> In browsers, the event loop keeps on runninh
+// --> In Node, when the event loop is idle, it waits at the poll phase. (Hence, it is called semi infinite loop)
+
+
+
+
+//***************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+
+// 3) Predict the output of this code :-
+
+setImmediate(() => console.log("setImmediate"));
+
+setTimeout(() => console.log("Timer Expired"), 0);
+
+Promise.resolve("Promise").then(console.log);
+
+fs.readFile("./file.txt", "utf8", () => {
+  setTimeout(() => console.log("2nd Timer"), 0);
+
+  process.nextTick(() => console.log("2nd nextTick"))
+
+  setImmediate(() => console.log("2nd setImmediate"))
+
+  console.log("File Reading CB");
+});
+
+process.nextTick(() => console.log("nextTick"));
+
+console.log("Last line of the file.");
+
+
+
+// Output :-
+// --> Last line of the file.
+// --> nextTick
+// --> Promise
+// --> Timer Expired
+// --> setImmediate
+// --> File Reading CB
+// --> 2nd nextTick
+// --> 2nd setImmediate
+// --> 2nd Timer
+
+
+
+
+// Explanation :-
+// --> First the async task will get executed
+// --> All the async tasks get offloaded to libuv
+
+
+// ****** First cycle of Event Loop *************
+// (INNER CYCLE)
+// --> process.nextTick() is sent to callStack and executed
+// --> Promise callback is sent to callStack and executed
+
+// (TIMER PHASE)
+// --> setTimeout() callback is pushed to callStack and executed
+
+// (INNER CYCLE)
+// --> No callback to be executed of process.nextTick() and promise callbacks
+
+
+// (POLL PHASE)
+// --> Since File Handling takes time, there is no callback in the callback queue for this phase
+
+// (INNER CYCLE)
+// --> No callback to be executed of process.nextTick() and promise callbacks
+
+
+// (CHECK PHASE)
+// --> setImmediate() callback is pushed to callStack and executed
+
+// (INNER CYCLE)
+// --> No callback to be executed of process.nextTick() and promise callbacks
+
+// (CLOSE PHASE)
+// --> No socket is required to get closed.
+
+
+
+// ****** Second cycle of Event Loop *************
+
+
+// (INNER CYCLE)
+// --> No callback to be executed of process.nextTick() and promise callbacks
+
+// (TIMER PHASE)
+// --> No callback is present for this phase
+
+// (INNER CYCLE)
+// --> No callback to be executed of process.nextTick() and promise callbacks
+
+
+// (POLL PHASE)
+// --> Now the Event Loop waits here as both the callStack as well as callback queues are empty
+// --> After some time the callback of file handling operation enters the respected callback queue
+// --> It contains further mix of sync and async tasks inside
+// --> Event Loop gives the callback to the callStack
+// --> Call Stack starts executing line by line
+// --> It executes the sync task of console.log()
+// --> offloads all the async task of setTimeout(). process.nextTick() and setImmediate to livuv again
+
+
+// ***** Cycle starting after poll phase :-
+//  (INNER CYCLE)
+// --> process.nextTick() is sent to callStack and executed
+
+// (CHECK PHASE :- as loop starts after poll phase)
+// --> setImmediate() callback is pushed to callStack and executed
+
+// (INNER CYCLE)
+// --> No callback to be executed of process.nextTick() and promise callbacks
+
+// (CLOSE PHASE)
+// --> No socket is required to get closed.
+
+// (INNER CYCLE)
+// --> No callback to be executed of process.nextTick() and promise callbacks
+
+// (TIMER PHASE)
+// --> setTimeout() callback is pushed to callStack and executed
+
+// ***** END :- Event loop waits in the Poll phase
+
+
+
+// Conclusion :-
+// --> When idle, Event loop waits in the poll phase
+// --> When starting again, it starts to execute starting from the next phase of poll phase instead of the actual beginning
