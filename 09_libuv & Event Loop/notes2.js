@@ -205,4 +205,56 @@ console.log("Last line of the file.");
 
 // Conclusion :-
 // --> When idle, Event loop waits in the poll phase
-// --> When starting again, it starts to execute starting from the next phase of poll phase instead of the actual beginning
+// --> When starting again, it starts to execute starting from the next phase (after Inside Loop) of poll phase instead of the actual beginning
+
+
+
+
+//***************************************************************************************************************************************************************************************************************************************************************************************************************************** */
+
+
+// 4) Predict the output of the code :-
+
+
+setImmediate(() => console.log("setImmediate"));
+
+setTimeout(() => console.log("Timer Expired"), 0);
+
+Promise.resolve("Promise1").then(console.log);
+
+fs.readFile("./file.txt", "utf8", () => {
+  console.log("File Reading CB");
+});
+
+process.nextTick(() => {
+  process.nextTick(() => console.log("inner nextTick"));
+  Promise.resolve("Promise2").then(console.log);
+  setTimeout(() => console.log("Timer Expired2"), 0);
+  console.log("nextTick")
+});
+
+console.log("Last line of the file.");
+
+
+
+
+// Output :-
+// --> Last line of the file
+// --> nextTick
+// --> inner nextTick
+// --> Promise1
+// --> Promise2
+// --> Timer Expired
+// --> setImmediate
+// --> File Reading CB
+
+
+
+// Explanation :-
+// --> Same as previous problem (Go step by step)
+// --> Note that the callback queues serve as FIFO, hence Promise2 inside the process.tick will be put in the callStack only after Promise1 has been already put in callStack. As Promise1 entered the callback queue first
+// --> Same happened with inner setTimeout and outer setTimeout
+
+
+// Conclusion :-
+// --> ALL individual Callback queues are normal FIFO for all the async tasks
