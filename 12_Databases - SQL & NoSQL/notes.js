@@ -131,6 +131,49 @@
 // Please refer to the image (RDBMS vs NoSQL_1.jpg)
 // Please refer to the image (RDBMS vs NoSQL_2.jpg)
 
+
+//--> In RDBMS, data is stored in the form of tables
+//--> Tables store data related to a particular type (e.g user table, student table)
+//--> Every table has rows and columns
+//--> The top most row which tells about the definition of every column is called SCHEMA .
+
+
+// --> In RDBMS, relation between tables is maintained using foreign keys, normalization and joins.
+// i) foreign keys :- to establish referential integrity (to relate the tables)
+// ii) Normalization :- to avoid redundancy
+// iii) Joins :- to retrieve required data from a combination of tables
+
+
+
+
+// --> In MongoDB :-
+// --> In RDBMS,we do not store data in a particular cell in the form of arrays, even if there can be multiple data for that particular cell
+// --> In MongoDB, we have a collection instead of a table and we store the data in the form of documents (looks like a json format object)
+// --> Hence, for every row in RDBMS, we have a separate document inside a collection
+// --> For, every column in RDBMS for that particular row, we have fields in MongoDB
+// In MongoDB, we can store arrays in a particular field of the same document, unlike in RDBMS where we use to create a separate table
+// --> Hence we dont need to normalize at a very deep level
+
+
+
+
+
+// ADVANTAGE :-
+// --> No need for joins
+// --> No need for data normalization
+// --> Flexible Schema :-
+// In RDBMS, due to fixed schema, if we skip data for a cell in a particular column, we will still have some space oocupied, and we have to provide the value "null". Even data type is also fixed.
+// In MongoDB, due to schema flexibility, space is occupied only for the fields we specify the data for.
+
+
+
+
+
+
+
+
+//# Differences :-
+
 // i) RDBMS :- Tables, Rows, Columns
 //    NoSQL :- Collection, document, fields
 
