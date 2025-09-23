@@ -76,7 +76,7 @@ require("./xyz")     // will also work as the extension is assumed to be ".js" o
 // --> They protect their variables and functions from leaking
 
 // --> We cannot access the variables and methods of separate module directly into our required module by just using require()
-// --> The code of that separate module will still
+// --> The code of that separate module will still be executed
 
 
 // e.g :- If we have a module "Sum.js"
@@ -240,3 +240,33 @@ console.log(sum2);
 
 
 // 7) The above type of pattern for imporing and exorting are known as "Common JS Modules (cjs) ".
+
+
+
+
+// ******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************
+
+
+
+// 8) Some extra points :-
+
+// a) If we are trying to require user made module from the current module than we need to add "./" in the path as 
+
+// --> If we give direct module name then node js explicitly checks for that module in its inbuilt library
+
+const req = require("sum.js");     //wrong
+const req = require("./sum.js");   // correct
+
+
+
+
+// b) Instead of module.exports we can also export using
+
+// --> exports. + anonymous function
+
+exports.add = () => {
+  return a + b;
+}
+
+// remember we can only use one way to export
+// ".add" here is not the name of the function in the original file but just one of the property of exports so that we can use that name as the name of the anonymous function while importing in some file, the function will still be originally an anonymous function. 
