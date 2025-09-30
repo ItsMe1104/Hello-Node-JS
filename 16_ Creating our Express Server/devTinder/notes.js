@@ -107,7 +107,6 @@ app.listen(3000, () => {
   console.log("Server is listening on PORT 3000");
 })
 
-// 44:00
 
 
 
@@ -153,8 +152,11 @@ app.use((req, res) => {
 
 // --> hence when the request comes on that specific URL, the server will send a specific response
 
-//?? NOTE :- Always order the handlers for the inner URLs first and then the outer ones, else the outer ones response will populate over the inner ones
-// --> Hence always order the "/" route (homepage) at the last
+//?? NOTE :- the routes here act as wildcard, so order the routes properly
+// e.g :- 
+// "/hello" route handler will always overwrite the "/hello/hello" or "/hello/xyz" route's handler if it is put in order above them
+// --> To avoid this, put the most inner routes in order first and then the outer routes
+// --> Hence, always order the "/" route (homepage) at the last else it will overwrite all the other route handlers
 
 
 //?? NOTE :- we can prepare any no. of handlers for different routes
